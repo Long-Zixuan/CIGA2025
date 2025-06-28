@@ -9,7 +9,7 @@ public class BaseObjectController : MonoBehaviour
     public float rotateSpeed = 2f;
     [Header("Attack")]
     public float attackSpeed = 1f;
-    public int damage;
+    public float damage;
     public float attackForce = 1f;
    
     public BoxCollider attackCol;

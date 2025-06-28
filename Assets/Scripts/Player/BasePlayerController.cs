@@ -12,11 +12,13 @@ public class BasePlayerController : MonoBehaviour
     public KeyCode jumpKey = KeyCode.Space;
     public KeyCode attackKey = KeyCode.Mouse0;
     [Header("HP")]
-    public int beginHp = 10;
+    public float beginHp = 10;
 
-    protected int hp_;
+    protected float hp_;
     
     private BaseObjectController objectController_;
+    
+    protected bool isDie_= false;
 
     public BaseObjectController ObjectController
     {
@@ -48,7 +50,7 @@ public class BasePlayerController : MonoBehaviour
         }
     }
     
-    public virtual void beBeating(int othDamage)
+    public virtual void beBeating(float othDamage)
     {
         hp_ -= othDamage;
         print(gameObject.name+":HP="+hp_);
@@ -56,9 +58,13 @@ public class BasePlayerController : MonoBehaviour
 
     protected void dieLogic()
     {
-        objectController_.deathLogic();
+        if (!isDie_)
+        {
+            objectController_.deathLogic();
+            isDie_ = true;
+        }
     }
-
+    
     protected void moveLogic()
     {
         float moveV = 0;
