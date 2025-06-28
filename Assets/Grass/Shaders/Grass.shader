@@ -30,7 +30,7 @@ Shader "Toon/Grass"
         {
 			Tags
 			{
-				"RenderType" = "Opaque"
+				"RenderType" = "Transparent"
 				"LightMode" = "UniversalForward"
 			}
 
