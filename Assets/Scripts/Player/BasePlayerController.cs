@@ -11,7 +11,10 @@ public class BasePlayerController : MonoBehaviour
     public KeyCode rightKey = KeyCode.D;
     public KeyCode jumpKey = KeyCode.Space;
     public KeyCode attackKey = KeyCode.Mouse0;
-    
+    [Header("HP")]
+    public int beginHp = 10;
+
+    protected int hp_;
     
     private BaseObjectController objectController_;
 
@@ -24,15 +27,36 @@ public class BasePlayerController : MonoBehaviour
     }
     
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
         objectController_ = GetComponent<BaseObjectController>();
+        hp_ = beginHp;
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
         moveLogic();
+        if (Input.GetKeyDown(attackKey))
+        {
+            objectController_.attack();
+        }
+
+        if (hp_ <= 0)
+        {
+            dieLogic();
+        }
+    }
+    
+    public virtual void beBeating(int othDamage)
+    {
+        hp_ -= othDamage;
+        print(gameObject.name+":HP="+hp_);
+    }
+
+    protected void dieLogic()
+    {
+        objectController_.deathLogic();
     }
 
     protected void moveLogic()

@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class BaseObjectController : MonoBehaviour
 {
+    [Header("Move")]
     public float moveSpeed = 5f;
     public float rotateSpeed = 2f;
+    [Header("Attack")]
     public float attackSpeed = 1f;
+    public int damage;
+   
     
-    protected bool isLive_ = true;
+    protected bool isDie_ = true;
     protected bool isAttacking_ = false;
     protected bool canMoving_ = false;
 
@@ -18,20 +22,22 @@ public class BaseObjectController : MonoBehaviour
 
     protected Animator animator_;
 
+    protected BasePlayerController playerController_;
+
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
         animator_ = GetComponent<Animator>();
         rigidbody_ = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
         moveLogic();
     }
 
-    protected virtual void attackLogic()
+    public virtual void attack()
     {
         animator_.SetTrigger("Attack");
         canMoving_ = false;
@@ -43,18 +49,28 @@ public class BaseObjectController : MonoBehaviour
         moveV_ = moveV;
     }
 
-    public virtual void aliveLogic()
+    public virtual void aliveLogic(BasePlayerController playerController)
     {
-        
+        playerController_ = playerController;
     }
+
+    
 
     protected virtual void moveLogic()
     {
+        if ( moveV_ != 0)
+        {
+            animator_.SetBool("isMoving", true);
+        }
+        else
+        {
+            animator_.SetBool("isMoving", false);
+        }
         transform.Rotate(0, moveH_ * Time.deltaTime * rotateSpeed, 0);
-        transform.Translate(transform.forward * moveV_ * Time.deltaTime * moveSpeed, Space.World);
+        transform.Translate(transform.right * moveV_ * Time.deltaTime * moveSpeed, Space.World);
     }
 
-    protected virtual void deathLogic()
+    public virtual void deathLogic()
     {
         animator_.SetTrigger("Death");
     }
