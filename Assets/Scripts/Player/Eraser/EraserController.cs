@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class EraserController : BaseObjectController
 {
-    public float attackForce = 1f;
-    public BoxCollider attackCol;
     public GameObject attackEffect;
     public float effectPosOffset = 0.5f;
 

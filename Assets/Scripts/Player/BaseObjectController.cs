@@ -10,7 +10,9 @@ public class BaseObjectController : MonoBehaviour
     [Header("Attack")]
     public float attackSpeed = 1f;
     public int damage;
+    public float attackForce = 1f;
    
+    public BoxCollider attackCol;
     
     protected bool isDie_ = true;
     protected bool isAttacking_ = false;
@@ -23,6 +25,14 @@ public class BaseObjectController : MonoBehaviour
     protected Animator animator_;
 
     protected BasePlayerController playerController_;
+    
+    public BasePlayerController PlayerController
+    {
+        get
+        {
+            return playerController_;
+        }
+    }
 
     // Start is called before the first frame update
     protected void Start()
