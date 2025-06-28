@@ -22,6 +22,7 @@ public class BasePlayerController : MonoBehaviour
     public Camera camera_;
 
     protected float hp_;
+    protected bool hadObjController = false;
 
     public float Hp
     {
@@ -35,26 +36,34 @@ public class BasePlayerController : MonoBehaviour
     protected BaseObjectController[] toys;
     protected BaseObjectController nestToy_ = null;
 
+
     public BaseObjectController ObjectController
     {
         set
         {
             objectController_ = value;
-        }
+            if (objectController_ != null)
+            {
+                objectController_.aliveLogic( this);
+                hadObjController = true;
+            }
+        } 
     }
-    
     // Start is called before the first frame update
     protected void Start()
     {
         print("Player Start:"+this.gameObject.name);
-        objectController_ = GetComponent<BaseObjectController>();
+        //objectController_ = GetComponent<BaseObjectController>();
         if (hp_ == 0)
         {
             hp_ = beginHp;
         }
-        toys = FindObjectsOfType<BaseObjectController>();
+
+        toys = GameManager.Instance.Toys;
         //Test
-        objectController_.aliveLogic(this);
+        //objectController_.aliveLogic(this);
+        print("HP:"+hp_);
+        print("Toys:"+toys.Length);
     }
 
     // Update is called once per frame
@@ -63,7 +72,12 @@ public class BasePlayerController : MonoBehaviour
         moveLogic();
         if (Input.GetKeyDown(attackKey))
         {
-            objectController_.attack();
+            if (objectController_ == null)
+            {
+                print("No Toy:"+gameObject.name);
+            }
+            else
+                objectController_.attack();
         }
 
         if (hp_ <= 0)
@@ -72,6 +86,8 @@ public class BasePlayerController : MonoBehaviour
         }
         chooseToyLogic();
     }
+
+    
     
     protected void chooseToyLogic()
     {
@@ -81,7 +97,7 @@ public class BasePlayerController : MonoBehaviour
         }
         nestToy_ = null;
         float minDis = 1000;
-        
+        BaseObjectController[] toys = GameManager.Instance.Toys;
         for (int i = 0; i < toys.Length; i++)
         {
             float dis = Vector3.Distance(toys[i].transform.position, transform.position);
@@ -101,17 +117,20 @@ public class BasePlayerController : MonoBehaviour
             if (Input.GetKeyDown(getToyKey))
             {
                 nestToy_.setOutlineCol(Color.black);
-                BasePlayerController playerController = nestToy_.AddComponent<BasePlayerController>();
-                playerController.cloneFrom( this);
-                camera_.GetComponent<CameraLogic>().player = playerController.transform;
+                //BasePlayerController playerController = nestToy_.AddComponent<BasePlayerController>();
+                //playerController.cloneFrom( this);
                 objectController_.deAliveLogic();
-                Destroy(this);
+                ObjectController = nestToy_;
+                camera_.GetComponent<CameraLogic>().player = objectController_.transform;
+               
+                //Destroy(this);
             }
         }
     }
     
     public virtual void beBeating(float othDamage)
     {
+        //print("damage:"+othDamage);
         hp_ -= othDamage;
         print(gameObject.name+":HP="+hp_);
     }
@@ -125,14 +144,19 @@ public class BasePlayerController : MonoBehaviour
         }
     }
 
-    public void cloneFrom(BasePlayerController other)
+    /*public void cloneFrom(BasePlayerController other)
     {
         hp_ = other.Hp;
         camera_ = other.camera_;
-    }
+        print("cloneFrom:"+gameObject.name);
+    }*/
 
     protected void moveLogic()
     {
+        if (!hadObjController)
+        {
+            return;
+        }
         float moveV = 0;
         float moveH = 0;
         if (Input.GetKey(upKey))

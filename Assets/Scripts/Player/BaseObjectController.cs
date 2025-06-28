@@ -48,6 +48,14 @@ public class BaseObjectController : MonoBehaviour
     {
         animator_ = GetComponent<Animator>();
         rigidbody_ = GetComponent<Rigidbody>();
+        if (isAlive_)
+        {
+            rigidbody_.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        }
+        else
+        {
+            rigidbody_.constraints = RigidbodyConstraints.None;
+        }
     }
 
     public void setOutlineCol(Color col)
@@ -82,9 +90,13 @@ public class BaseObjectController : MonoBehaviour
     {
         playerController_ = playerController;
         transform.rotation = Quaternion.Euler(0, playerController.transform.rotation.eulerAngles.y, 0);
-        transform.position = playerController.transform.position + new Vector3(0, aliveOffect, 0);
+        transform.position = this.transform.position + new Vector3(0, aliveOffect, 0);
+        playerController_.camera_.gameObject.GetComponent<CameraLogic>().player = this.transform;
        // rigidbody_.freezeRotation = true;
-        rigidbody_.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+       if (rigidbody_ != null)
+       {
+           rigidbody_.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+       }
         isAlive_ = true;
     }
 

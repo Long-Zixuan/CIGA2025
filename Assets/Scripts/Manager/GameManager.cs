@@ -20,7 +20,18 @@ public class GameManager : MonoBehaviour
             return instance_s;
         }
     }
-    
+
+    public BasePlayerController player1Controller;
+    public BasePlayerController player2Controller;
+
+    private BaseObjectController[] toys_;
+    public BaseObjectController[] Toys
+    {
+        get
+        {
+            return toys_;
+        }
+    }
     private List<GameManagerListener> gameManagerListeners_ = new List<GameManagerListener>();
 
     private void Awake()
@@ -28,6 +39,19 @@ public class GameManager : MonoBehaviour
         if (instance_s == null)
         {
             instance_s = this;
+            toys_ = FindObjectsOfType<BaseObjectController>();
+            print("toys_:"+toys_.Length);
+            int index = UnityEngine.Random.Range(0, toys_.Length);
+            if (player1Controller == null)
+            {
+                player1Controller = GameObject.Find("Player1Controller").gameObject.GetComponent<BasePlayerController>();
+            }
+            if (player2Controller == null)
+            {
+                player2Controller = GameObject.Find("Player2Controller").gameObject.GetComponent<BasePlayerController>();
+            }
+            player1Controller.ObjectController=toys_[index];
+            player2Controller.ObjectController=toys_[(index + 1) % toys_.Length];
         }
         else
         {
@@ -36,12 +60,9 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    public BaseObjectController[] playerControllers_;
     // Start is called before the first frame update
     void Start()
     {
-        playerControllers_ = FindObjectsOfType<BaseObjectController>();
-        UnityEngine.Random.Range(0, playerControllers_.Length);
         
     }
 
