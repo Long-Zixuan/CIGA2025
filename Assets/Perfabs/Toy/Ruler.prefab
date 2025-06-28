@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8337943318308268393}
   m_Layer: 0
   m_Name: Bone.005
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 8337943318354525565}
   m_Layer: 0
   m_Name: "\u9AA8\u67B6.005"
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 8337943318551505185}
   m_Layer: 0
   m_Name: Bone.002
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 8337943318662872935}
   m_Layer: 0
   m_Name: Bone.001_end
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 8337943318665381798}
   m_Layer: 0
   m_Name: Bone.003
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 8337943318787064686}
   m_Layer: 0
   m_Name: Ruler
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -263,9 +263,10 @@ MonoBehaviour:
   downKey: 274
   leftKey: 276
   rightKey: 275
-  jumpKey: 32
   attackKey: 256
+  getToyKey: 324
   beginHp: 10
+  getToyDis: 2
 --- !u!114 &8337943318787064686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,6 +285,8 @@ MonoBehaviour:
   damage: 11
   attackForce: 10
   attackCol: {fileID: 8337943319722306667}
+  aliveOffect: 1
+  render_: {fileID: 8337943319227101145}
 --- !u!1 &8337943318927901681
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +298,7 @@ GameObject:
   - component: {fileID: 8337943318927901680}
   m_Layer: 0
   m_Name: Bone.001
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -327,7 +330,7 @@ GameObject:
   - component: {fileID: 8337943319061882524}
   m_Layer: 0
   m_Name: Bone.009
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -359,7 +362,7 @@ GameObject:
   - component: {fileID: 8337943319118537746}
   m_Layer: 0
   m_Name: Bone.010
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -392,7 +395,7 @@ GameObject:
   - component: {fileID: 8337943319173000880}
   m_Layer: 0
   m_Name: ruler_IK_end
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -424,7 +427,7 @@ GameObject:
   - component: {fileID: 8337943319227101145}
   m_Layer: 0
   m_Name: ruler
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -520,7 +523,7 @@ GameObject:
   - component: {fileID: 8337943319301528682}
   m_Layer: 0
   m_Name: Bone.008
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -552,7 +555,7 @@ GameObject:
   - component: {fileID: 8337943319366966640}
   m_Layer: 0
   m_Name: Bone
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -584,7 +587,7 @@ GameObject:
   - component: {fileID: 8337943319566247691}
   m_Layer: 0
   m_Name: ruler_IK
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -616,7 +619,7 @@ GameObject:
   - component: {fileID: 8337943319607379694}
   m_Layer: 0
   m_Name: Bone.006
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -649,7 +652,7 @@ GameObject:
   - component: {fileID: 8337943319624514495}
   m_Layer: 0
   m_Name: Bone.007
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -683,7 +686,7 @@ GameObject:
   - component: {fileID: 8337943319722306666}
   m_Layer: 0
   m_Name: AttackCol
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -742,7 +745,7 @@ GameObject:
   - component: {fileID: 8337943320082836848}
   m_Layer: 0
   m_Name: Bone.004
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

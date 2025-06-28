@@ -13,10 +13,19 @@ public class BaseObjectController : MonoBehaviour
     public float attackForce = 1f;
    
     public BoxCollider attackCol;
+    [Header("Alive")] public float aliveOffect = 1f;
+
+    [Header("Render")] public Renderer render_;
     
     protected bool isDie_ = true;
     protected bool isAttacking_ = false;
     protected bool canMoving_ = false;
+    protected bool isAlive_ = false;
+
+    public bool IsAlive
+    {
+        get { return isAlive_; }
+    }
 
     protected float moveH_;
     protected float moveV_;
@@ -41,6 +50,11 @@ public class BaseObjectController : MonoBehaviour
         rigidbody_ = GetComponent<Rigidbody>();
     }
 
+    public void setOutlineCol(Color col)
+    {
+        render_.material.SetColor("_OutlineColor", col);
+    }
+
     // Update is called once per frame
     protected void Update()
     {
@@ -52,6 +66,11 @@ public class BaseObjectController : MonoBehaviour
         animator_.SetTrigger("Attack");
         canMoving_ = false;
     }
+
+    public virtual Vector3 getForword()
+    {
+        return transform.right;
+    }
     
     public virtual void move(float moveH,float moveV)
     {
@@ -62,6 +81,18 @@ public class BaseObjectController : MonoBehaviour
     public virtual void aliveLogic(BasePlayerController playerController)
     {
         playerController_ = playerController;
+        transform.rotation = Quaternion.Euler(0, playerController.transform.rotation.eulerAngles.y, 0);
+        transform.position = playerController.transform.position + new Vector3(0, aliveOffect, 0);
+       // rigidbody_.freezeRotation = true;
+        rigidbody_.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        isAlive_ = true;
+    }
+
+    public virtual void deAliveLogic()
+    {
+        rigidbody_.constraints = RigidbodyConstraints.None;
+        playerController_ = null;
+        isAlive_ = false;
     }
 
     

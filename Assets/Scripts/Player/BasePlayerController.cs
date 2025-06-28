@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UIElements;
 
 public class BasePlayerController : MonoBehaviour
 {
@@ -9,16 +12,28 @@ public class BasePlayerController : MonoBehaviour
     public KeyCode downKey = KeyCode.S;
     public KeyCode leftKey = KeyCode.A;
     public KeyCode rightKey = KeyCode.D;
-    public KeyCode jumpKey = KeyCode.Space;
     public KeyCode attackKey = KeyCode.Mouse0;
+    public KeyCode getToyKey = KeyCode.Mouse1;
     [Header("HP")]
     public float beginHp = 10;
 
+    [Header("Other")] 
+    public float getToyDis = 1;
+    public Camera camera_;
+
     protected float hp_;
+
+    public float Hp
+    {
+        get { return hp_; }
+    }
     
     private BaseObjectController objectController_;
     
     protected bool isDie_= false;
+
+    protected BaseObjectController[] toys;
+    protected BaseObjectController nestToy_ = null;
 
     public BaseObjectController ObjectController
     {
@@ -31,8 +46,15 @@ public class BasePlayerController : MonoBehaviour
     // Start is called before the first frame update
     protected void Start()
     {
+        print("Player Start:"+this.gameObject.name);
         objectController_ = GetComponent<BaseObjectController>();
-        hp_ = beginHp;
+        if (hp_ == 0)
+        {
+            hp_ = beginHp;
+        }
+        toys = FindObjectsOfType<BaseObjectController>();
+        //Test
+        objectController_.aliveLogic(this);
     }
 
     // Update is called once per frame
@@ -47,6 +69,44 @@ public class BasePlayerController : MonoBehaviour
         if (hp_ <= 0)
         {
             dieLogic();
+        }
+        chooseToyLogic();
+    }
+    
+    protected void chooseToyLogic()
+    {
+        if (nestToy_ != null)
+        {
+            nestToy_.setOutlineCol(Color.black);
+        }
+        nestToy_ = null;
+        float minDis = 1000;
+        
+        for (int i = 0; i < toys.Length; i++)
+        {
+            float dis = Vector3.Distance(toys[i].transform.position, transform.position);
+            if ( dis < getToyDis && !toys[i].IsAlive)
+            {
+                if (dis < minDis)
+                {
+                    minDis = dis;
+                    nestToy_ = toys[i];
+                }
+            }
+        }
+
+        if (nestToy_ != null)
+        {
+            nestToy_.setOutlineCol(Color.red);
+            if (Input.GetKeyDown(getToyKey))
+            {
+                nestToy_.setOutlineCol(Color.black);
+                BasePlayerController playerController = nestToy_.AddComponent<BasePlayerController>();
+                playerController.cloneFrom( this);
+                camera_.GetComponent<CameraLogic>().player = playerController.transform;
+                objectController_.deAliveLogic();
+                Destroy(this);
+            }
         }
     }
     
@@ -64,7 +124,13 @@ public class BasePlayerController : MonoBehaviour
             isDie_ = true;
         }
     }
-    
+
+    public void cloneFrom(BasePlayerController other)
+    {
+        hp_ = other.Hp;
+        camera_ = other.camera_;
+    }
+
     protected void moveLogic()
     {
         float moveV = 0;

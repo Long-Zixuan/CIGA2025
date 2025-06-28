@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3349771466597308391}
   m_Layer: 0
   m_Name: Bone.004
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 1880351914209301743}
   m_Layer: 0
   m_Name: Bone.007_end
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 7645745890826802523}
   m_Layer: 0
   m_Name: whole
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 9001857350171260713}
   m_Layer: 0
   m_Name: Bone
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 4119292518816689863}
   m_Layer: 0
   m_Name: Pen
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -234,6 +234,8 @@ MonoBehaviour:
   damage: 1
   attackForce: 10
   attackCol: {fileID: 4119292519129743384}
+  aliveOffect: 1
+  render_: {fileID: 3924599275096386997}
 --- !u!114 &4119292518816689863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,9 +252,10 @@ MonoBehaviour:
   downKey: 115
   leftKey: 97
   rightKey: 100
-  jumpKey: 32
   attackKey: 323
+  getToyKey: 324
   beginHp: 10
+  getToyDis: 2
 --- !u!1 &4119292519129743389
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,7 +269,7 @@ GameObject:
   - component: {fileID: 4119292519129743387}
   m_Layer: 0
   m_Name: AttackCol
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -325,7 +328,7 @@ GameObject:
   - component: {fileID: 4831335127967835029}
   m_Layer: 0
   m_Name: Bone_end
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -356,7 +359,7 @@ GameObject:
   - component: {fileID: 2880380390952385034}
   m_Layer: 0
   m_Name: Bone.003
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -388,7 +391,7 @@ GameObject:
   - component: {fileID: 5256829021135701538}
   m_Layer: 0
   m_Name: Bone.006
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -420,7 +423,7 @@ GameObject:
   - component: {fileID: 2587966148009405960}
   m_Layer: 0
   m_Name: Bone.005
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -452,7 +455,7 @@ GameObject:
   - component: {fileID: 6484548931313077088}
   m_Layer: 0
   m_Name: Bone.002
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -484,7 +487,7 @@ GameObject:
   - component: {fileID: 5351300812951185814}
   m_Layer: 0
   m_Name: Bone.007
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -517,7 +520,7 @@ GameObject:
   - component: {fileID: 6874395647396278868}
   m_Layer: 0
   m_Name: "\u9AA8\u67B6.002"
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -549,7 +552,7 @@ GameObject:
   - component: {fileID: 8698429092769742039}
   m_Layer: 0
   m_Name: Bone.001
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -582,7 +585,7 @@ GameObject:
   - component: {fileID: 3924599275096386997}
   m_Layer: 0
   m_Name: "\u67F1\u4F53.002"
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
