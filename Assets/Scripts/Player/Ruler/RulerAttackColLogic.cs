@@ -8,7 +8,7 @@ namespace Player.Ruler
     public class RulerAttackColLogic : MonoBehaviour
     {
         [SerializeField]
-        private RulerController rulerController_;
+        private BaseObjectController rulerController_;//凑合一下
         public GameObject hitEffect;
         private bool isAttacking_;
 
