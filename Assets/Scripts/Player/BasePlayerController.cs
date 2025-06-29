@@ -23,6 +23,19 @@ public class BasePlayerController : MonoBehaviour
 
     protected float hp_;
     protected bool hadObjController = false;
+    protected bool canMove_ = true;
+
+    public bool CanMove
+    {
+        set { canMove_ = value; }
+    }
+
+    protected bool canCatchToy_ = true;
+    
+    public bool CanCatchToy
+    {
+        set { canCatchToy_ = value; }
+    }
 
     public float Hp
     {
@@ -96,7 +109,7 @@ public class BasePlayerController : MonoBehaviour
             nestToy_.setOutlineCol(Color.black);
         }
         nestToy_ = null;
-        float minDis = 1000;
+        float minDis = float.MaxValue;
         BaseObjectController[] toys = GameManager.Instance.Toys;
         for (int i = 0; i < toys.Length; i++)
         {
@@ -114,7 +127,7 @@ public class BasePlayerController : MonoBehaviour
         if (nestToy_ != null)
         {
             nestToy_.setOutlineCol(Color.red);
-            if (Input.GetKeyDown(getToyKey))
+            if (Input.GetKeyDown(getToyKey) && canCatchToy_)
             {
                 nestToy_.setOutlineCol(Color.black);
                 //BasePlayerController playerController = nestToy_.AddComponent<BasePlayerController>();
@@ -133,6 +146,7 @@ public class BasePlayerController : MonoBehaviour
         //print("damage:"+othDamage);
         hp_ -= othDamage;
         print(gameObject.name+":HP="+hp_);
+        GameManager.Instance.sendDamage(this, othDamage);
     }
 
     protected void dieLogic()
@@ -153,6 +167,10 @@ public class BasePlayerController : MonoBehaviour
 
     protected void moveLogic()
     {
+        if (!canMove_)
+        {
+            return;
+        }
         if (!hadObjController)
         {
             return;

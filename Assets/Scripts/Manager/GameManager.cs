@@ -7,6 +7,10 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
+    private bool isGaming_ = true;
+    [Header("UI")] 
+    public GameUILogic player1UI;
+    public GameUILogic player2UI;
     
     private static GameManager instance_s;
     public static GameManager Instance
@@ -20,10 +24,10 @@ public class GameManager : MonoBehaviour
             return instance_s;
         }
     }
-
+    [Header("Player")]
     public BasePlayerController player1Controller;
     public BasePlayerController player2Controller;
-
+    
     private BaseObjectController[] toys_;
     public BaseObjectController[] Toys
     {
@@ -74,13 +78,43 @@ public class GameManager : MonoBehaviour
 
     void GameRunningLogic()
     {
+        if (!isGaming_)
+        {
+            return;
+        }
         if (player1Controller.IsDie)
         {
-            
+            player1UI.lose();
+            player2UI.win();
+            isGaming_ = false;
         }
         if (player2Controller.IsDie)
         {
-            
+            player2UI.lose();
+            player1UI.win();
+            isGaming_ = false;
+        }
+
+        if (!isGaming_)
+        {
+            foreach (var listener in gameManagerListeners_)
+            {
+                listener.OnGameEnd();
+            }
+        }
+        
+    }
+    
+
+    public void sendDamage(BasePlayerController playerController, float damage)
+    {
+        if (playerController == player1Controller)
+        {
+            player1UI.heartMinus(Convert.ToInt32(damage));
+        }
+        if (playerController == player2Controller)
+        {
+            player2UI.heartMinus(Convert.ToInt32(damage));
         }
     }
 

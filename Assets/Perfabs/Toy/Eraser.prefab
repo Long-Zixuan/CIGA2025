@@ -164,8 +164,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   rotateSpeed: 100
-  attackSpeed: 2
-  damage: 1
+  attackSpeed: 3
+  damage: 3
   attackForce: 15
   attackCol: {fileID: 8708662390273943148}
   aliveOffect: 1
@@ -176,6 +176,8 @@ MonoBehaviour:
   attackEffect: {fileID: 3432958286849152088, guid: b54d71cab0ae01d4ea6c04a149127c9f,
     type: 3}
   effectPosOffset: 6
+  attackBkFloatOffect: 7
+  attackYOffect: 5
 --- !u!1 &8708662390237011079
 GameObject:
   m_ObjectHideFlags: 0

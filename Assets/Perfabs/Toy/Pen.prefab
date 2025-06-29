@@ -230,7 +230,7 @@ MonoBehaviour:
   moveSpeed: 5
   rotateSpeed: 50
   attackSpeed: 1
-  damage: 3
+  damage: 2
   attackForce: 10
   attackCol: {fileID: 4119292519129743384}
   aliveOffect: 1

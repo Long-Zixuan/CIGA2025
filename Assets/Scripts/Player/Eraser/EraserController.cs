@@ -52,6 +52,7 @@ public class EraserController : BaseObjectController
 
     IEnumerator attckLogic()
     {
+        playerController_.CanCatchToy = false;
         GameObject cameraObj = playerController_.camera_.gameObject;
         
         CameraLogic cameraLogic = playerController_.camera_.GetComponent<CameraLogic>();
@@ -71,7 +72,7 @@ public class EraserController : BaseObjectController
                 1.3f
             ).SetEase(ease: Ease.OutQuad) //缓动类型
             .SetUpdate(true); 
-        
+        playerController_.CanMove = false;
         yield return new WaitForSeconds(1.3f);
         cameraObj.transform.DOShakePosition(1, new Vector3(3, 3, 0));
         GameObject effect1 = Instantiate(attackEffect, 
@@ -109,5 +110,8 @@ public class EraserController : BaseObjectController
                 0.2f
             ).SetEase(ease: Ease.OutQuad) //缓动类型
             .SetUpdate(true); 
+        yield return new WaitForSeconds(0.5f);
+        playerController_.CanMove = true;
+        playerController_.CanCatchToy = true;
     }
 }
