@@ -87,7 +87,7 @@ public class BaseObjectController : MonoBehaviour
         timer_ = 0;
         animator_.SetTrigger("Attack");
         attackAudio_.Play();
-        canMoving_ = false;
+        //canMoving_ = false;
     }
 
     public virtual Vector3 getForword()
@@ -151,7 +151,8 @@ public class BaseObjectController : MonoBehaviour
 
     public virtual void deathLogic()
     {
-        animator_.SetTrigger("Death");
+        animator_.SetBool("Death",true);
+        playerController_.CanMove = false;
     }
 
 }
