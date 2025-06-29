@@ -262,7 +262,7 @@ MonoBehaviour:
   walkAudio_: {fileID: 4023778944040710166}
   attackAudio_: {fileID: 102986704258812736}
   moveSpeed: 5
-  rotateSpeed: 30
+  rotateSpeed: 200
   attackSpeed: 1.5
   damage: 2
   attackForce: 5
