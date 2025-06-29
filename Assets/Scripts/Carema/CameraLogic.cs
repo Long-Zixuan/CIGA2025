@@ -1,3 +1,4 @@
+using CartoonFX;
 using UnityEngine;
 
 /// <summary>
@@ -26,13 +27,22 @@ public class CameraLogic : MonoBehaviour
 
     public float backFloat;             //Z�������ǵľ���
 
+    public float yOffect = 0;
+
     public string[] unColiTags;
     
     bool findPlayer = false;
 
-    void LateUpdate()
-
+    private Vector3 followPos;
+    
+    void Start()
     {
+        followPos = player.position + new Vector3(0, yOffect, 0);
+    }
+    
+    void Update()
+    {
+        followPos = player.position + new Vector3(0, yOffect, 0);
         if (!findPlayer)
         {
             try
@@ -53,7 +63,7 @@ public class CameraLogic : MonoBehaviour
         {
             //��¼�����ʼλ��
 
-            tagetPostion = player.position + player.up * upFloat - 
+            tagetPostion = followPos + player.up * upFloat - 
                            player.gameObject.GetComponent<BaseObjectController>().getForword() * backFloat;
 
             //[size = 12.6667px]//ˢ�����Ŀ��������
@@ -64,7 +74,7 @@ public class CameraLogic : MonoBehaviour
 
             transform.position = Vector3.SmoothDamp(transform.position, tagetPostion, ref ve3, 0);
 
-            angel = Quaternion.LookRotation(player.position - tagetPostion);
+            angel = Quaternion.LookRotation(followPos - tagetPostion);
 
             transform.rotation = Quaternion.Slerp(transform.rotation, angel, speed);
         }

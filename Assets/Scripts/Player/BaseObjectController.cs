@@ -16,6 +16,10 @@ public class BaseObjectController : MonoBehaviour
     [Header("Alive")] public float aliveOffect = 1f;
 
     [Header("Render")] public Renderer render_;
+
+    [Header("Effect")] 
+    public GameObject aliveEffect;
+    public float aliveEffectTime = 1f;
     
     protected bool isDie_ = true;
     protected bool isAttacking_ = false;
@@ -104,6 +108,9 @@ public class BaseObjectController : MonoBehaviour
        {
            rigidbody_.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
        }
+
+       Instantiate(aliveEffect, transform.position + new Vector3(0, aliveEffectTime, 0),
+           aliveEffect.transform.rotation);
         isAlive_ = true;
     }
 
@@ -111,6 +118,9 @@ public class BaseObjectController : MonoBehaviour
     {
         rigidbody_.constraints = RigidbodyConstraints.None;
         playerController_ = null;
+        moveV_ = 0;
+        moveH_ = 0;
+        gameObject.transform.rotation = Quaternion.Euler(45, 0, 0);
         isAlive_ = false;
     }
 

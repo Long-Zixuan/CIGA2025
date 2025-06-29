@@ -74,7 +74,14 @@ public class GameManager : MonoBehaviour
 
     void GameRunningLogic()
     {
-        
+        if (player1Controller.IsDie)
+        {
+            
+        }
+        if (player2Controller.IsDie)
+        {
+            
+        }
     }
 
     public void addListener(GameManagerListener listener)

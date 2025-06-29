@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 8708662389665852636}
   m_Layer: 0
   m_Name: Eraser
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -165,11 +165,14 @@ MonoBehaviour:
   moveSpeed: 5
   rotateSpeed: 100
   attackSpeed: 2
-  damage: 11
-  attackForce: 10
+  damage: 1
+  attackForce: 15
   attackCol: {fileID: 8708662390273943148}
   aliveOffect: 1
   render_: {fileID: 8708662391462603321}
+  aliveEffect: {fileID: 8771972552311404799, guid: cc4a78b5b2363694a98d8d7c850349b2,
+    type: 3}
+  aliveEffectTime: 1
   attackEffect: {fileID: 3432958286849152088, guid: b54d71cab0ae01d4ea6c04a149127c9f,
     type: 3}
   effectPosOffset: 6

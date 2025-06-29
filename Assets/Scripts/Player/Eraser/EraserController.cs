@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class EraserController : BaseObjectController
 {
     public GameObject attackEffect;
     public float effectPosOffset = 0.5f;
+
+    public float attackBkFloatOffect = 7f;
+    public float attackYOffect = 5f;
 
     private List<GameObject> objsInAttckColl_ = new List<GameObject>();
 
@@ -48,7 +52,28 @@ public class EraserController : BaseObjectController
 
     IEnumerator attckLogic()
     {
+        GameObject cameraObj = playerController_.camera_.gameObject;
+        
+        CameraLogic cameraLogic = playerController_.camera_.GetComponent<CameraLogic>();
+        float beginBkFloat = cameraLogic.backFloat;
+        float beginYOffect = cameraLogic.yOffect;
+        DOTween.To(
+                () => cameraLogic.backFloat,
+                x => cameraLogic.backFloat = x,
+                cameraLogic.backFloat + attackBkFloatOffect,
+                1.3f
+            ).SetEase(ease: Ease.OutQuad) //缓动类型
+            .SetUpdate(true); 
+        DOTween.To(
+                () => cameraLogic.yOffect,
+                x => cameraLogic.yOffect = x,
+                cameraLogic.yOffect + attackYOffect,
+                1.3f
+            ).SetEase(ease: Ease.OutQuad) //缓动类型
+            .SetUpdate(true); 
+        
         yield return new WaitForSeconds(1.3f);
+        cameraObj.transform.DOShakePosition(1, new Vector3(3, 3, 0));
         GameObject effect1 = Instantiate(attackEffect, 
             transform.TransformPoint(new Vector3( effectPosOffset,0, 0)), 
             Quaternion.Euler(0,0,0),this.transform);
@@ -68,14 +93,21 @@ public class EraserController : BaseObjectController
                     objController.PlayerController.beBeating(damage);
                 }
             }
-            /*BasePlayerController playerController = obj.GetComponent<BasePlayerController>();
-            if (playerController != null)
-            {
-                if (playerController != this.playerController_)
-                {
-                    playerController.beBeating(damage);
-                }
-            }*/
         }
+        //yield return new WaitForSeconds(0.1f);
+        DOTween.To(
+                () => cameraLogic.backFloat,
+                x => cameraLogic.backFloat = x,
+                beginBkFloat,
+                0.2f
+            ).SetEase(ease: Ease.OutQuad) //缓动类型
+            .SetUpdate(true); 
+        DOTween.To(
+                () => cameraLogic.yOffect,
+                x => cameraLogic.yOffect = x,
+                beginYOffect,
+                0.2f
+            ).SetEase(ease: Ease.OutQuad) //缓动类型
+            .SetUpdate(true); 
     }
 }

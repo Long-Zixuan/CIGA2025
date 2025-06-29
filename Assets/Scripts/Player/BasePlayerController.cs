@@ -33,6 +33,11 @@ public class BasePlayerController : MonoBehaviour
     
     protected bool isDie_= false;
 
+    public bool IsDie
+    {
+        get { return isDie_; }
+    }
+
     protected BaseObjectController[] toys;
     protected BaseObjectController nestToy_ = null;
 
@@ -62,8 +67,8 @@ public class BasePlayerController : MonoBehaviour
         toys = GameManager.Instance.Toys;
         //Test
         //objectController_.aliveLogic(this);
-        print("HP:"+hp_);
-        print("Toys:"+toys.Length);
+        //print("HP:"+hp_);
+        //print("Toys:"+toys.Length);
     }
 
     // Update is called once per frame

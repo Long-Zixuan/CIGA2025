@@ -230,11 +230,14 @@ MonoBehaviour:
   moveSpeed: 5
   rotateSpeed: 50
   attackSpeed: 1
-  damage: 1
+  damage: 3
   attackForce: 10
   attackCol: {fileID: 4119292519129743384}
   aliveOffect: 1
   render_: {fileID: 3924599275096386997}
+  aliveEffect: {fileID: 8771972552311404799, guid: cc4a78b5b2363694a98d8d7c850349b2,
+    type: 3}
+  aliveEffectTime: 2
 --- !u!1 &4119292519129743389
 GameObject:
   m_ObjectHideFlags: 0
