@@ -52,6 +52,8 @@ public class EraserController : BaseObjectController
 
     IEnumerator attckLogic()
     {
+        moveH_ = 0;
+        moveV_ = 0;
         playerController_.CanCatchToy = false;
         GameObject cameraObj = playerController_.camera_.gameObject;
         

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BaseObjectController : MonoBehaviour
 {
+    [Header("Audio")]
+    public AudioSource walkAudio_;
+    public AudioSource attackAudio_;
     [Header("Move")]
     public float moveSpeed = 5f;
     public float rotateSpeed = 2f;
@@ -83,6 +86,7 @@ public class BaseObjectController : MonoBehaviour
         }
         timer_ = 0;
         animator_.SetTrigger("Attack");
+        attackAudio_.Play();
         canMoving_ = false;
     }
 
@@ -131,10 +135,15 @@ public class BaseObjectController : MonoBehaviour
         if ( moveV_ != 0)
         {
             animator_.SetBool("isMoving", true);
+            if (!walkAudio_.isPlaying)
+            {
+                walkAudio_.Play();
+            }
         }
         else
         {
             animator_.SetBool("isMoving", false);
+            walkAudio_.Stop();
         }
         transform.Rotate(0, moveH_ * Time.deltaTime * rotateSpeed, 0);
         transform.Translate(transform.right * moveV_ * Time.deltaTime * moveSpeed, Space.World);
