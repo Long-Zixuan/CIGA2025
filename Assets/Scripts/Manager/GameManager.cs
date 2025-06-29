@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     [Header("UI")] 
     public GameUILogic player1UI;
     public GameUILogic player2UI;
+
+    public GameObject botton;
     
     private static GameManager instance_s;
     public static GameManager Instance
@@ -97,6 +99,7 @@ public class GameManager : MonoBehaviour
 
         if (!isGaming_)
         {
+            botton.SetActive( true);
             foreach (var listener in gameManagerListeners_)
             {
                 listener.OnGameEnd();
