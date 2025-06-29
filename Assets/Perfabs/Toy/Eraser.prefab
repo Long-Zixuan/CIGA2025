@@ -164,7 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   rotateSpeed: 100
-  attackSpeed: 1
+  attackSpeed: 2
   damage: 11
   attackForce: 10
   attackCol: {fileID: 8708662390273943148}

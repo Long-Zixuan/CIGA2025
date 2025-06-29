@@ -72,12 +72,7 @@ public class BasePlayerController : MonoBehaviour
         moveLogic();
         if (Input.GetKeyDown(attackKey))
         {
-            if (objectController_ == null)
-            {
-                print("No Toy:"+gameObject.name);
-            }
-            else
-                objectController_.attack();
+            objectController_.attack();
         }
 
         if (hp_ <= 0)
@@ -100,7 +95,7 @@ public class BasePlayerController : MonoBehaviour
         BaseObjectController[] toys = GameManager.Instance.Toys;
         for (int i = 0; i < toys.Length; i++)
         {
-            float dis = Vector3.Distance(toys[i].transform.position, transform.position);
+            float dis = Vector3.Distance(toys[i].transform.position, objectController_.transform.position);
             if ( dis < getToyDis && !toys[i].IsAlive)
             {
                 if (dis < minDis)

@@ -67,10 +67,17 @@ public class BaseObjectController : MonoBehaviour
     protected void Update()
     {
         moveLogic();
+        timer_ += Time.deltaTime;
     }
 
+    protected float timer_ = 0;
     public virtual void attack()
     {
+        if (timer_ < attackSpeed)
+        {
+            return;
+        }
+        timer_ = 0;
         animator_.SetTrigger("Attack");
         canMoving_ = false;
     }

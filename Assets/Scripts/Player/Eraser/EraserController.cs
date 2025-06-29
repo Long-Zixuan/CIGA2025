@@ -37,7 +37,12 @@ public class EraserController : BaseObjectController
 
     public override void attack()
     {
+        if (timer_ < attackSpeed)
+        {
+            return;
+        }
         base.attack();
+       
         StartCoroutine(attckLogic());
     }
 
@@ -54,20 +59,23 @@ public class EraserController : BaseObjectController
         foreach (var obj in objsInAttckColl_)
         {
             Vector3 dir = (obj.transform.position - attackCol.transform.position).normalized;
-            if (obj.GetComponent<BaseObjectController>() != null)
+            BaseObjectController objController = obj.GetComponent<BaseObjectController>();
+            if (objController != null)
             {
                 obj.GetComponent<Rigidbody>().AddForce(dir * attackForce, ForceMode.Impulse);
+                if (objController.PlayerController != null)
+                {
+                    objController.PlayerController.beBeating(damage);
+                }
             }
-            BasePlayerController playerController = obj.GetComponent<BasePlayerController>();
+            /*BasePlayerController playerController = obj.GetComponent<BasePlayerController>();
             if (playerController != null)
             {
                 if (playerController != this.playerController_)
                 {
                     playerController.beBeating(damage);
                 }
-            }
-            
+            }*/
         }
-        
     }
 }

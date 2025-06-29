@@ -21,7 +21,12 @@ public class PencilController : BaseObjectController
     
     public override void attack()
     {
+        if (timer_ < attackSpeed)
+        {
+            return;
+        }
         base.attack();
+        
         StartCoroutine(attackLogic());
     }
 

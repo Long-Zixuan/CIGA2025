@@ -36,18 +36,24 @@ namespace Player.Ruler
                 Vector3 hitPos = other.bounds.ClosestPoint(transform.position);
                 Instantiate(hitEffect, hitPos, Quaternion.identity);
                 Vector3 dir = (other.transform.position - rulerController_.transform.position).normalized;
-                if (other.GetComponent<BaseObjectController>() != null)
+                BaseObjectController baseObjectController = other.GetComponent<BaseObjectController>();
+                if (baseObjectController != null)
                 {
                     other.GetComponent<Rigidbody>().AddForce(dir * rulerController_.attackForce, ForceMode.Impulse);
+                    if (baseObjectController.PlayerController != null)
+                    {
+                        baseObjectController.PlayerController.beBeating(rulerController_.damage);
+                    }
+                    
                 }
-                BasePlayerController playerController = other.GetComponent<BasePlayerController>();
+                /*BasePlayerController playerController = other.GetComponent<BasePlayerController>();
                 if (playerController != null)
                 {
                     if (playerController != rulerController_.PlayerController)
                     {
                         playerController.beBeating(rulerController_.damage);
                     }
-                }
+                }*/
             }
         }
     }
