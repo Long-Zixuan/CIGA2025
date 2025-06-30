@@ -153,6 +153,8 @@ public class BaseObjectController : MonoBehaviour
     {
         animator_.SetBool("Death",true);
         playerController_.CanMove = false;
+        moveV_ = 0;
+        moveH_ = 0;
     }
 
 }
