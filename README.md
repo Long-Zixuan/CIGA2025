@@ -2,10 +2,10 @@
 
 # 糟糕！我被玩具包围了？！
 
-![./ScreenShot/](.\ScreenShot\fm.jpg)
+![./ScreenShot/](./ScreenShot/fm.jpg)
 
-![./ScreenShot/](.\ScreenShot\1.jpg)
+![./ScreenShot/](./ScreenShot/1.jpg)
 
-![./ScreenShot/](.\ScreenShot\2.jpg)
+![./ScreenShot/](./ScreenShot/2.jpg)
 
-![./ScreenShot/](.\ScreenShot\3.jpg)
+![./ScreenShot/](./ScreenShot/3.jpg)
