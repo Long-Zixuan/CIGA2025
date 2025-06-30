@@ -130,11 +130,10 @@ public class BasePlayerController : MonoBehaviour
             if (Input.GetKeyDown(getToyKey) && canCatchToy_)
             {
                 nestToy_.setOutlineCol(Color.black);
-                //BasePlayerController playerController = nestToy_.AddComponent<BasePlayerController>();
-                //playerController.cloneFrom( this);
                 objectController_.deAliveLogic();
                 ObjectController = nestToy_;
                 camera_.GetComponent<CameraLogic>().player = objectController_.transform;
+                camera_.GetComponent<CameraLogic>().transView(objectController_.transform,0.5f);
                
                 //Destroy(this);
             }

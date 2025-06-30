@@ -1,4 +1,5 @@
 using CartoonFX;
+using DG.Tweening;
 using UnityEngine;
 
 /// <summary>
@@ -31,9 +32,14 @@ public class CameraLogic : MonoBehaviour
 
     public string[] unColiTags;
     
-    bool findPlayer = false;
-
     private Vector3 followPos;
+
+    private bool follow_ = true;
+
+    public bool Follow
+    {
+        set { follow_ = value; } 
+    }
     
     void Start()
     {
@@ -42,43 +48,51 @@ public class CameraLogic : MonoBehaviour
     
     void Update()
     {
+        if (follow_)
+        {
+            followLogic();
+        }
+
+    }
+
+    public void transView(Transform tagetTransform, float transTime)
+    {
+        follow_ = false;
+        Vector3 followPos = tagetTransform.position + new Vector3(0, yOffect, 0);
+        Vector3 tagetPos = followPos + player.up * upFloat - 
+                   player.gameObject.GetComponent<BaseObjectController>().getForword() * backFloat;
+        transform.DOMove(tagetPos,transTime,false);
+        Quaternion tagetRotate = Quaternion.LookRotation( followPos - tagetPos);
+        Vector3 tagetRotateEuler = tagetRotate.eulerAngles;
+        transform.DORotate(tagetRotateEuler,transTime,RotateMode.Fast);
+        Invoke("setFollowTrue", transTime);
+    }
+
+    void setFollowTrue()
+    {
+        follow_ = true;
+    }
+
+    void followLogic()
+    {
         followPos = player.position + new Vector3(0, yOffect, 0);
-        if (!findPlayer)
-        {
-            try
-            {
-                //player = GameObject.FindObjectOfType<CtrlTank>().gameObject.transform;
-            }
-            catch (System.Exception e)
-            {
-                print(e.ToString());
-            }
-            
-            if (player != null)
-            {
-                findPlayer = true;
-            }
-        }
-        else
-        {
-            //��¼�����ʼλ��
+      
+        //��¼�����ʼλ��
 
-            tagetPostion = followPos + player.up * upFloat - 
-                           player.gameObject.GetComponent<BaseObjectController>().getForword() * backFloat;
+        tagetPostion = followPos + player.up * upFloat - 
+                       player.gameObject.GetComponent<BaseObjectController>().getForword() * backFloat;
 
-            //[size = 12.6667px]//ˢ�����Ŀ��������
+        //[size = 12.6667px]//ˢ�����Ŀ��������
 
-            tagetPostion = Function(tagetPostion);
+        tagetPostion = Function(tagetPostion);
 
-            //���ǵ��ƶ��Ϳ���
+        //���ǵ��ƶ��Ϳ���
 
-            transform.position = Vector3.SmoothDamp(transform.position, tagetPostion, ref ve3, 0);
+        transform.position = Vector3.SmoothDamp(transform.position, tagetPostion, ref ve3, 0);
 
-            angel = Quaternion.LookRotation(followPos - tagetPostion);
+        angel = Quaternion.LookRotation(followPos - tagetPostion);
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, angel, speed);
-        }
-
+        transform.rotation = Quaternion.Slerp(transform.rotation, angel, speed);
     }
 
     /// <summary>
